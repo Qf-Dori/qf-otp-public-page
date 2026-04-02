@@ -16,8 +16,8 @@
         "./**/*.ts",
         "../../@types/**/*.modules.d.ts",
         "script_includes/OTPVerificationUtil.server.js",
-        "rest api/requestOtp.js",
-        "rest api/verifySubmit.js"
+        "rest_api/requestOtp.js",
+        "rest_api/verifySubmit.js"
     ],
     "exclude": [
         "**/*.now.ts"
