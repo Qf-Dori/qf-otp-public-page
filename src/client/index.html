@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Forward — Complaint Portal</title>
+
+  <!-- Cloudflare Turnstile preconnect — the actual script is loaded dynamically
+       by CloudflareTurnstile.tsx with the page's CSP nonce applied -->
+  <link rel="preconnect" href="https://challenges.cloudflare.com" />
+
+  <!-- Inter — enterprise-standard UI font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Initialize globals and Include ServiceNow's required scripts -->
+  <sdk:now-ux-globals></sdk:now-ux-globals>
+
+  <!-- Include your React entry point -->
+  <script src="./main.tsx" type="module"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

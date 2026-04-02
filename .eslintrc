@@ -1,0 +1,51 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["n", "@servicenow/sdk-app-plugin", "@typescript-eslint"],
+  "extends": ["plugin:@servicenow/sdk-app-plugin/recommended"],
+  "globals": {
+    "Now": "readonly",
+    "g_ck": "readonly"
+  },
+  "ignorePatterns": ["*.css", "*.scss", "*.html", "*.d.ts"],
+  "rules": {
+    "no-console": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/client/**"],
+      "env": {
+        "browser": true,
+        "es2022": true
+      },
+      "rules": {
+        "no-restricted-globals": "off",
+        "n/no-unsupported-features/node-builtins": "off",
+        "n/file-extension-in-import": "off",
+        "@servicenow/sdk-app-plugin/file-extension-in-import": "off",
+        "@servicenow/sdk-app-plugin/no-unsupported-node-builtins": "off"
+      }
+    },
+    {
+      "files": ["src/fluent/server/**"],
+      "env": {
+        "es2022": true
+      },
+      "rules": {
+        "n/no-unsupported-features/node-builtins": "off"
+      }
+    }
+  ]
+}

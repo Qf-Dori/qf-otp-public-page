@@ -1,0 +1,8 @@
+
+- (Optional) Add SMS OTP support
+- (Optional) Add QR entry with signed product_id parameter
+- git repo + A GitHub Personal Access Token (PAT) is a secure alternative to a password for authenticating with GitHub. It is used to access GitHub's API and perform actions like cloning repositories, pushing changes, or managing workflows.
+
+in github - goto - personal access tokens - Generate 
+
+learn how to create a metadata for - say the full scripted rest api 
