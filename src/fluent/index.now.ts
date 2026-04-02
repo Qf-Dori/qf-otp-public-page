@@ -33,15 +33,13 @@ ScriptInclude({
 
 
 
-// Alternative way to define the Scripted REST API (sys_ws_definition)
-/*It doesn't recognize all ServiceNow database fields, causing TypeScript errors 
- [e.g  requires_authentication: false] - 
+// Alternative way to define the RestApi (sys_ws_definition)
+/*Problem : RestApi  doesn't recognize all ServiceNow database fields, causing TypeScript errors 
+   [e.g  requires_authentication: false] - DOT NOT WORK with RestApi helper. 
 
- The Solution with Record API
-
-A "direct" way to talk to the database tables (sys_ws_definition and sys_ws_operation)
+  Solution : A "direct" way to talk to the database tables (sys_ws_definition and sys_ws_operation)
 , allowing you to manually set every field—like Namespace, Public Access,
- and Relative Path—without the SDK blocking you */
+  and Relative Path—without the SDK blocking you */
 
 //  export const QF_Public_API_Definition = Record({
 //     $id: Now.ID['qf-api-header'],
