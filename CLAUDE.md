@@ -135,3 +135,54 @@ Key points:
 - `path` on a route is optional — omitting it maps the route to the service root.
 - Each route's `script` is a separate `.js` handler file (plain JS, Rhino/ES5).
 - Multiple `RestApi(...)` calls can live in the same `index.now.ts`.
+
+---
+
+### Direct Record Pattern — Alternative REST API Registration
+
+**Problem:** The `RestApi` helper doesn't recognize all ServiceNow database fields, causing TypeScript errors (e.g. `requires_authentication: false` is not accepted).
+
+**Solution:** Use `Record(...)` to write directly to the underlying tables (`sys_ws_definition` for the service, `sys_ws_operation` for the endpoint). This lets you set every field — Namespace, Public Access, Relative Path, ACL bypass — without the SDK blocking you.
+
+```ts
+import { Record } from '@servicenow/sdk/core';
+
+// 1. Define the REST Service (sys_ws_definition)
+export const myService = Record({
+    $id: Now.ID['<service-id-key>'],
+    table: 'sys_ws_definition',
+    data: {
+        name: '<service_name>',
+        service_id: '<service_id>',
+        namespace: 'x_77594_quality_fo',
+        active: true,
+        short_description: '...',
+        enforce_acl: []
+    }
+});
+
+// 2. Define the Endpoint (sys_ws_operation)
+Record({
+    $id: Now.ID['<endpoint-id-key>'],
+    table: 'sys_ws_operation',
+    data: {
+        web_service_definition: myService,   // links to the service above
+        name: '<route_name>',
+        http_method: 'POST',
+        relative_path: '/path',
+        active: true,
+        // Fields the RestApi helper blocks:
+        requires_authentication: false,
+        requires_acl_authorization: false,
+        requires_snc_internal_role: false,
+        // @ts-ignore - Now.include exists at runtime
+        operation_script: Now.include('../server/rest_api/<handler>.js')
+    }
+});
+```
+
+Key points:
+- Use this when you need `requires_authentication: false` or other fields the `RestApi` helper rejects.
+- `web_service_definition` links the endpoint record to the service record by reference (pass the exported const).
+- The handler file uses `operation_script` (not `script` as in `RestApi` routes).
+- Path prefix for `Now.include` is relative to `index.now.ts` — from `src/fluent/` use `../server/...`.

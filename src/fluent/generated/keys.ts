@@ -9,11 +9,6 @@ declare global {
                         table: 'sys_module'
                         id: '4b56758586df453faab4eff6a64c6506'
                     }
-                    'cmp-rest-api': {
-                        table: 'sys_ws_definition'
-                        id: '254362bd88df4d55b99a2884222ec5c5'
-                        deleted: true
-                    }
                     'complaints-utils': {
                         table: 'sys_script_include'
                         id: '6ba80cef8f7a45a8970db4218c93ae51'
@@ -26,10 +21,13 @@ declare global {
                         table: 'sys_module'
                         id: 'fbd2ba77098a42b18ba4fdd3b4c0e9b6'
                     }
-                    'request-otp': {
+                    'qf-api-header': {
+                        table: 'sys_ws_definition'
+                        id: '77c4244cd4ab405e83f34d108cee53b2'
+                    }
+                    'qf-otp-endpoint': {
                         table: 'sys_ws_operation'
-                        id: 'b55fc78f038445ff935ca69e8fe3dc10'
-                        deleted: true
+                        id: 'cf9ff3ea569641618bb248e0da4cb36a'
                     }
                     'src_server_rest api_requestOtp_js': {
                         table: 'sys_module'
@@ -38,6 +36,10 @@ declare global {
                     'src_server_rest api_submitComplaint_js': {
                         table: 'sys_module'
                         id: '99cc9bc471b14352848d410429aa1602'
+                    }
+                    'src_server_rest api_verifyReqToken_js': {
+                        table: 'sys_module'
+                        id: '24db40859e084308b23b980fb2e86d69'
                     }
                     'src_server_rest api_verifySubmit_js': {
                         table: 'sys_module'
@@ -58,11 +60,6 @@ declare global {
                     'turnstile-validator': {
                         table: 'sys_script_include'
                         id: 'c06a51a53b2e43c284fbc23c34227658'
-                    }
-                    'verify-submit': {
-                        table: 'sys_ws_operation'
-                        id: '5ffd8afe17064ad78789bf5454a1b51b'
-                        deleted: true
                     }
                 }
                 composite: [

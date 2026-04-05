@@ -1,6 +1,6 @@
 import '@servicenow/sdk/global';
 // @ts-ignore ScriptInclude exists at runtime but is not typed in this SDK version
-import { ScriptInclude } from '@servicenow/sdk/core';
+import { ScriptInclude,Record } from '@servicenow/sdk/core';
 
 
 ScriptInclude({
@@ -41,38 +41,42 @@ ScriptInclude({
 , allowing you to manually set every field—like Namespace, Public Access,
   and Relative Path—without the SDK blocking you */
 
-//  export const QF_Public_API_Definition = Record({
-//     $id: Now.ID['qf-api-header'],
-//     table: 'sys_ws_definition',
-//     data: {
-//         name: 'Quality Forward Public API',
-//         service_id: 'cmp_opt_default_service',
-//         namespace: 'x_77594_quality_fo',
-//         active: true,
-//         short_description: 'Pharma-grade complaint intake',
-//         enforce_acl: [] // Typed as an array in the SDK
-//     }
-// });
+ export const request_token = Record({
+    $id: Now.ID['qf-api-header'],
+    table: 'sys_ws_definition',
+    data: {
+        name: 'verify_request_token',
+        service_id: 'req_token',
+        namespace: 'x_77594_quality_fo',
+        active: true,
+        short_description: 'Is to verify token sent to user email for OTP verification and not injected by bots',
+        consumes: 'application/json',
+        produces: 'application/json',
+        enforce_acl: [] // Typed as an array in the SDK
+    }
+});
 
 // 2. Define the OTP Resource (Endpoint)
-// Record({
-//     $id: Now.ID['qf-otp-endpoint'],
-//     table: 'sys_ws_operation',
-//     data: {
-//         // Link to the record above
-//         web_service_definition: QF_Public_API_Definition, 
+Record({
+    $id: Now.ID['qf-otp-endpoint'],
+    table: 'sys_ws_operation',
+    data: {
+        // Link to the record above
+        web_service_definition: request_token, 
         
-//         name: 'email_otp',
-//         http_method: 'POST',
-//         relative_path: '/submit',
-//         active: true,
-        
-//         // These are the "hidden" fields that the RestApi helper blocks
-//         requires_authentication: false,
-//         requires_acl_authorization: false,
-//         requires_snc_internal_role: false,
+        name: 'verify',
+        http_method: 'POST',
+        relative_path: '/verify',
+        active: true,
+        consumes: 'application/json',
+        produces: 'application/json',
 
-//     // @ts-ignore - Now.include exists at runtime
-//         operation_script: Now.include('../server/rest_api/test.server.js')
-//     }
-// });
+        // These are the "hidden" fields that the RestApi helper blocks
+        requires_authentication: false,
+        requires_acl_authorization: false,
+        requires_snc_internal_role: false,
+
+    // @ts-ignore - Now.include exists at runtime
+        operation_script: Now.include('../server/rest api/verifyReqToken.js')
+    }
+});
